@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'content_pager.dart';
 
 //底部导航框架
 class TabNavigator extends StatefulWidget {
@@ -10,6 +11,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blue;
   int _currentIndex = 0;//当前选中的index
+  final ContentPagerController _contentPagerController = ContentPagerController();
 
   //底部Tab
   _bottomItem(String title,IconData icon,int index){
@@ -31,13 +33,20 @@ class _TabNavigatorState extends State<TabNavigator> {
               end: Alignment.bottomCenter
           ),
         ),
-        child: Center(
-          child: Text("你点击了第$_currentIndex个tab",style: TextStyle(fontSize: 36,color: Colors.blue),),
+        child: ContentPager(
+          onPageChanged: (int index){
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          contentPagerController: _contentPagerController,
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index){
+          //控制内容区域滚动到指定位置
+          _contentPagerController.jumpToPage(index);
           //修改选中索引状态
           setState(() {
             _currentIndex = index;
