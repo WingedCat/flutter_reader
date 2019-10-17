@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'custom_appbar.dart';
 
 class ContentPager extends StatefulWidget {
   final ValueChanged<int> onPageChanged;
@@ -40,6 +43,7 @@ class _ContentPagerState extends State<ContentPager> {
     if(widget.contentPagerController != null){
       widget.contentPagerController._pageController = _pageController;
     }
+    _statusBar();
     super.initState();
   }
 
@@ -47,7 +51,7 @@ class _ContentPagerState extends State<ContentPager> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        //TODO:APPBAR
+        CustomAppBar(),
         Expanded(//高度撑开，否则在Column中没有高度会报错
           child: PageView(
             onPageChanged: widget.onPageChanged,
@@ -62,6 +66,19 @@ class _ContentPagerState extends State<ContentPager> {
         )
       ],
     );
+  }
+  
+  //状态栏样式，沉浸式状态栏
+  _statusBar(){
+    SystemUiOverlayStyle uiOverlayStyle = SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF000000),
+      systemNavigationBarDividerColor: null,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    );
+    SystemChrome.setSystemUIOverlayStyle(uiOverlayStyle);
   }
 }
 
