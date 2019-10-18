@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'card_recommend.dart';
 import 'custom_appbar.dart';
 
 class ContentPager extends StatefulWidget {
@@ -27,14 +28,10 @@ class _ContentPagerState extends State<ContentPager> {
     Colors.teal
   ];
 
-  Widget _wrapItem(int index){
+  Widget _wrapItem(Widget widget){
     return Padding(
       padding: EdgeInsets.all(10),
-      child: Container(
-        decoration: BoxDecoration(
-          color:_colorList[index],
-        ),
-      ),
+      child: widget,
     );
   }
 
@@ -56,10 +53,10 @@ class _ContentPagerState extends State<ContentPager> {
           child: PageView(
             onPageChanged: widget.onPageChanged,
             children: <Widget>[
-              _wrapItem(0),
-              _wrapItem(1),
-              _wrapItem(2),
-              _wrapItem(3),
+              _wrapItem(CardRecommend()),
+              _wrapItem(CardRecommend()),
+              _wrapItem(CardRecommend()),
+              _wrapItem(CardRecommend()),
             ],
             controller: _pageController,
           ),
