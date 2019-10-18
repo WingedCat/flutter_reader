@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'card_free.dart';
 import 'card_recommend.dart';
+import 'card_share.dart';
 import 'custom_appbar.dart';
 
 class ContentPager extends StatefulWidget {
@@ -54,8 +56,8 @@ class _ContentPagerState extends State<ContentPager> {
             onPageChanged: widget.onPageChanged,
             children: <Widget>[
               _wrapItem(CardRecommend()),
-              _wrapItem(CardRecommend()),
-              _wrapItem(CardRecommend()),
+              _wrapItem(CardShare()),
+              _wrapItem(CardFree()),
               _wrapItem(CardRecommend()),
             ],
             controller: _pageController,

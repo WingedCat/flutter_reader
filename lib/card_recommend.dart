@@ -29,6 +29,7 @@ class _CardRecommendState extends BaseCardState{
   bottomContent() {
     return Expanded(
       child: Container(
+        constraints: BoxConstraints.expand(),
         margin: EdgeInsets.only(top: 20),
         child: Image.network("http://www.devio.org/io/flutter_beauty/card_1.jpg",fit: BoxFit.cover,),
       ),
